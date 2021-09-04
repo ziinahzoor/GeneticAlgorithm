@@ -116,9 +116,6 @@ namespace GeneticAlgorithm
             foreach (Chromosome chromosome in Individuals)
             {
                 Console.WriteLine(chromosome);
-                Console.WriteLine($"X: {chromosome.X} Y: {chromosome.Y}");
-                Console.WriteLine($"X: {chromosome.X.ToDecimal()} Y: {chromosome.Y.ToDecimal()}");
-                Console.WriteLine($"{chromosome.Fitness}\n");
             }
         }
     }
