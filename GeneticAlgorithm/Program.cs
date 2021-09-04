@@ -14,8 +14,8 @@ namespace GeneticAlgorithm
 
             for (int i = 0; i < NUMBER_OF_GENERATIONS; i++)
             {
-                currentGeneration.Print();
-                WriteGreen($"Mais Apto:\n{currentGeneration.Fittest}");
+                WriteGreen($"Geração: {currentGeneration.GenerationNumber} " +
+                    $"| Mais Apto: {currentGeneration.Fittest.Fitness}");
 
                 nextGeneration = currentGeneration.Mate();
                 currentGeneration = nextGeneration;

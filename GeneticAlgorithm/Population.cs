@@ -13,7 +13,7 @@ namespace GeneticAlgorithm
 
         private static bool IsInitialized { get; set; }
 
-        private int GenerationNumber { get; set; }
+        public int GenerationNumber { get; private set; }
 
         public List<Chromosome> Individuals { get; private set; } = new();
 
