@@ -8,10 +8,5 @@ namespace GeneticAlgorithm
         {
             return Convert.ToInt64(binaryNum, 2);
         }
-
-        public static string ToBinary(this int decimalNum)
-        {
-            return Convert.ToString(decimalNum, 2);
-        }
     }
 }

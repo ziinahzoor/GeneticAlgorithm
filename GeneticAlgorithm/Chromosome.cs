@@ -6,9 +6,16 @@ namespace GeneticAlgorithm
 {
     public class Chromosome
     {
+        private const double MUTATION_RATE = 0.008;
+
         private static readonly int[] DOMAIN = { -100, 100 };
 
-        public string Genes { get; }
+        public Chromosome(string genes)
+        {
+            Genes = genes;
+        }
+
+        public string Genes { get; private set; }
 
         public string X { get => string.Join(string.Empty, Genes.Take(Size / 2)); }
 
@@ -17,11 +24,6 @@ namespace GeneticAlgorithm
         public double Fitness { get => GetFitness();  }
 
         public int Size { get => Genes.Length; }
-
-        public Chromosome(string genes)
-        {
-            Genes = genes;
-        }
 
         private double GetFitness()
         {
@@ -50,6 +52,38 @@ namespace GeneticAlgorithm
             return ApplyFunction(x, y);
         }
 
-        public override string ToString() => Genes;
+        public int[] GetGenes() => Genes.Select(g => int.Parse(g.ToString())).ToArray();
+
+        public Chromosome Crossover(int crossoverPoint, Chromosome mate)
+        {
+            int[] thisChromosomeGenes = GetGenes();
+            int[] mateGenes = mate.GetGenes();
+
+            int[] childGenes = thisChromosomeGenes;
+
+            for (int i = crossoverPoint; i < Genes.Length; i++)
+            {
+                childGenes[i] = mateGenes[i];
+            }
+
+            return new Chromosome(string.Join(string.Empty, childGenes));
+        }
+
+        public void Mutate()
+        {
+            int[] genes = GetGenes();
+
+            for (int i = 0; i < Genes.Length; i++)
+            {
+                if (RandomGenerator.GetDouble(0, 1) <= MUTATION_RATE)
+                {
+                    genes[i] = genes[i] == 0 ? 1 : 0;
+                }
+            }
+
+            Genes = string.Join(string.Empty, genes);
+        }
+
+        public override string ToString() => $"Genes: {Genes}\nAptidão: {Fitness}";
     }
 }

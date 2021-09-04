@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using static System.Math;
 
 namespace GeneticAlgorithm
 {
@@ -8,21 +6,40 @@ namespace GeneticAlgorithm
     {
         public const int POPULATION_SIZE = 100;
         public const int NUMBER_OF_GENERATIONS = 40;
-        public const double CROSSOVER_RATE = 0.65;
-        public const double MUTATION_RATE = 0.008;
 
         public static void Main()
         {
-            List<Chromosome> population = new();
-            population.AddRange(ChromosomeGenerator.InitializePopulation(POPULATION_SIZE));
+            Population currentGeneration = Population.Initialize(POPULATION_SIZE);
+            Population nextGeneration;
 
-            foreach (var chromosome in population)
+            for (int i = 0; i < NUMBER_OF_GENERATIONS; i++)
             {
-                Console.WriteLine(chromosome);
-                //Console.WriteLine($"X: {chromosome.X} Y: {chromosome.Y}");
-                //Console.WriteLine($"X: {chromosome.X.ToDecimal()} Y: {chromosome.Y.ToDecimal()}");
-                Console.WriteLine($"{chromosome.Fitness}\n");
+                currentGeneration.Print();
+                WriteGreen($"Mais Apto:\n{currentGeneration.Fittest}");
+
+                nextGeneration = currentGeneration.Mate();
+                currentGeneration = nextGeneration;
             }
+
+            WriteBlue("Última geração:\n");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            currentGeneration.Print();
+            Console.ResetColor();
+            WriteBlue($"Mais Apto: {currentGeneration.Fittest}");
+        }
+
+        private static void WriteGreen(string text)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(text);
+            Console.ResetColor();
+        }
+
+        private static void WriteBlue(string text)
+        {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine(text);
+            Console.ResetColor();
         }
     }
 }
