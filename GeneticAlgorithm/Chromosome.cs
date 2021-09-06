@@ -53,6 +53,8 @@ namespace GeneticAlgorithm
         }
 
         public int[] GetGenes() => Genes.Select(g => int.Parse(g.ToString())).ToArray();
+        
+        public Chromosome Copy() => new(Genes);
 
         public Chromosome Crossover(int crossoverPoint, Chromosome mate)
         {

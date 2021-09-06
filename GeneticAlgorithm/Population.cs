@@ -83,8 +83,8 @@ namespace GeneticAlgorithm
                 }
                 else
                 {
-                    child1 = parent1;
-                    child2 = parent2;
+                    child1 = parent1.Copy();
+                    child2 = parent2.Copy();
                 }
 
                 child1.Mutate();
