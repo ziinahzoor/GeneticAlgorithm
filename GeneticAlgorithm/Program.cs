@@ -12,7 +12,7 @@ namespace GeneticAlgorithm
             Population currentGeneration = Population.Initialize(POPULATION_SIZE);
             Population nextGeneration;
 
-            for (int i = 0; i < NUMBER_OF_GENERATIONS; i++)
+            for (int i = 0; i < NUMBER_OF_GENERATIONS - 1; i++)
             {
                 WriteGreen($"Geração: {currentGeneration.GenerationNumber} " +
                     $"| Mais Apto: {currentGeneration.Fittest.Fitness}");
@@ -21,11 +21,11 @@ namespace GeneticAlgorithm
                 currentGeneration = nextGeneration;
             }
 
-            WriteBlue("Última geração:\n");
+            WriteBlue("\nÚltima geração:");
             Console.ForegroundColor = ConsoleColor.Magenta;
             currentGeneration.Print();
             Console.ResetColor();
-            WriteBlue($"Mais Apto: {currentGeneration.Fittest}");
+            WriteBlue($"Mais Apto:\n{currentGeneration.Fittest}");
         }
 
         private static void WriteGreen(string text)
